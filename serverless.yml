@@ -1,0 +1,12 @@
+component: website
+name: sermas
+app: sermas-015e4355
+
+inputs:
+  src:
+    src: ./src
+    hook: npm run build
+    dist: ./dist
+  bucketName: sermas
+  protocol: https
+  region: ap-guangzhou
