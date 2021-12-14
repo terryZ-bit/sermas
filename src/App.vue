@@ -9,7 +9,14 @@
 export default {
   name: 'App',
   components: {
-  }
+  },
+  mounted: function () {
+    //此方法刷新页面时也会执行
+    window.addEventListener('beforeunload',()=>{
+      localStorage.removeItem('token');
+      localStorage.removeItem('email');
+    });
+  },
 }
 </script>
 

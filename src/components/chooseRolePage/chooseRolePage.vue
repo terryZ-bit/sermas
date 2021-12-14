@@ -28,16 +28,16 @@
               或者
               <span style="color: #4e7ad2">创建</span>
               一个角色登入：</h1>
-            <el-empty description="还没有角色" v-if="((!$route.params.role_num) && (!newRoleCardAllowed))">
+            <el-empty description="还没有角色" v-show="((!role_num) && (!newRoleCardAllowed))">
               <el-button type="primary" plain @click="newRole">创建角色</el-button>
             </el-empty>
 
-            <div class="main-page-role-list" v-show="(($route.params.role_num) && (!newRoleCardAllowed))" v-for="role in $route.params.role_list" :key="role.role_name">
-              <el-button icon="el-icon-user-solid">
+            <div class="main-page-role-list" v-show="((role_num) && (!newRoleCardAllowed))" v-for="role in role_list" :key="role.role_name">
+              <el-button icon="el-icon-user-solid" @click="loginRole(role.role_id)">
                 {{role.role_name}}
               </el-button>
             </div>
-            <el-button icon="el-icon-upload2" v-if="($route.params.role_num && (!newRoleCardAllowed))" plain @click="newRole">
+            <el-button icon="el-icon-upload2" v-show="(role_num && (!newRoleCardAllowed))" plain @click="newRole">
               新建一个角色
             </el-button>
 
@@ -57,6 +57,7 @@
 <script>
 import PublicHeader from "../publicComponents/header";
 import NewRoleCard from "./newRoleCard";
+import axios from "axios";
 export default {
   name: "mainPage",
   components: {NewRoleCard, PublicHeader},
@@ -65,6 +66,8 @@ export default {
     return {
       choose_user_role: false,
       newRoleCardAllowed: false,
+      role_list: this.$route.params.role_list,
+      role_num: this.$route.params.role_num
     }
   },
 
@@ -79,6 +82,38 @@ export default {
 
     roleCardRollBack() {
       this.newRoleCardAllowed = false
+      axios
+        .get('https://1904535339792558.cn-chengdu.fc.aliyuncs.com/2016-08-15/proxy/sermas-backend/get-role-list/',
+            {
+              params: {
+                email: localStorage.getItem('email'),
+                token: localStorage.getItem('token')
+              }
+            }
+        ).then(resp => {
+          console.log(resp)
+          this.role_list = resp.data.data.role_list
+          this.role_num = resp.data.data.role_num
+        }).catch(error => {
+          console.log(error)
+          if (error.response.data === 'token time out') {
+            this.$message.error('由于长时间未操作，登录身份已过期，请重新登录！！！')
+            this.$router.push('/')
+          }else if (error.response.data === 'check role error') {
+            this.$message.error('查寻角色发生错误，请联系管理员')
+            this.$router.push('/')
+          }
+      })
+    },
+
+    loginRole(role_id) {
+      axios
+        .get('',
+            {
+              params: {
+                role_id: role_id
+              }
+            })
     }
   }
 }

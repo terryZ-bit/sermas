@@ -130,6 +130,7 @@ export default {
             .then(resp => {
               console.log(resp)
               this.$message.success('成功创建角色！')
+              this.roll_back()
             })
             .catch(error => {
               if (error.response.data === 'set auth code error') {
