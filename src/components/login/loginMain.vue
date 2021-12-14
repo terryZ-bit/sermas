@@ -85,7 +85,7 @@ export default {
           })
           this.login_in_btn_load = false
           this.$router.push({
-            name: 'mainPage',
+            name: 'chooseRolePage',
             params: {
               login_info: this.username.toString(),
               role_num: resp.data.data.role_num,

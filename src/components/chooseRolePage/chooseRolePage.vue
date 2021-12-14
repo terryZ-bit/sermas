@@ -37,7 +37,7 @@
                 {{role.role_name}}
               </el-button>
             </div>
-            <el-button icon="el-icon-upload2" v-if="($route.params.role_num && (!newRoleCardAllowed))" plain>
+            <el-button icon="el-icon-upload2" v-if="($route.params.role_num && (!newRoleCardAllowed))" plain @click="newRole">
               新建一个角色
             </el-button>
 

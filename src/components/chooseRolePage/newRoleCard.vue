@@ -108,10 +108,8 @@ export default {
         this.is_join = false
       }
       this.is_all_done = true
-      this.is_join = false
-      if (param === '2') {
-        this.is_join = true
-      }
+
+      this.is_join = param === '2';
     },
 
     roll_back() {
@@ -131,8 +129,19 @@ export default {
                 )
             .then(resp => {
               console.log(resp)
-          })
-          this.$message.success('成功创建角色！')
+              this.$message.success('成功创建角色！')
+            })
+            .catch(error => {
+              if (error.response.data === 'set auth code error') {
+                this.$message.error('由于长时间未操作，登录身份已过期，请重新登录')
+                this.$router.push('/')
+                localStorage.removeItem('token')
+              }else if(error.response.data === 'connect sql error') {
+                this.$message.error('服务器错误,请联系网站维护人员')
+              }else if(error.response.data === 'insert error') {
+                this.$message.error('创建时发生错误')
+              }
+            })
         }else {
           this.$message.error('提交表单失败！')
         }
