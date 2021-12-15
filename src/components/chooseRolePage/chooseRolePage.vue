@@ -33,7 +33,7 @@
             </el-empty>
 
             <div class="main-page-role-list" v-show="((role_num) && (!newRoleCardAllowed))" v-for="role in role_list" :key="role.role_name">
-              <el-button icon="el-icon-user-solid" @click="loginRole(role.role_id)">
+              <el-button icon="el-icon-user-solid" @click="loginRole(role.role_id, role.role_name, role.role)" :loading="role_check_loading">
                 {{role.role_name}}
               </el-button>
             </div>
@@ -67,7 +67,8 @@ export default {
       choose_user_role: false,
       newRoleCardAllowed: false,
       role_list: this.$route.params.role_list,
-      role_num: this.$route.params.role_num
+      role_num: this.$route.params.role_num,
+      role_check_loading: false
     }
   },
 
@@ -106,14 +107,26 @@ export default {
       })
     },
 
-    loginRole(role_id) {
-      axios
-        .get('',
-            {
-              params: {
-                role_id: role_id
-              }
-            })
+    loginRole(role_id, role_name, role) {
+      // axios
+      //   .get('',
+      //       {
+      //         params: {
+      //           role_id: role_id
+      //         }
+      //       })
+      this.role_check_loading = true
+      this.$message.success(role_id)
+
+      this.$router.push({
+        name: 'home',
+        params: {
+          email: localStorage.getItem('email'),
+          role_id: role_id,
+          role_name: role_name,
+          role: role,
+        }
+      })
     }
   }
 }
