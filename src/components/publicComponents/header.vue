@@ -1,7 +1,7 @@
 <template>
   <div id="public-header">
     <div class="logo-area">
-      <img class="logo" src="../../../public/image/logo.png"/>
+      <img class="logo" src="../../../public/image/logo.png" alt="logo"/>
     </div>
 
     <div class="header-black"/>
@@ -29,7 +29,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 
 #public-header {
   width: 100%;

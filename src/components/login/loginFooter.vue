@@ -11,7 +11,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 #login-footer {
   display: flex;
   flex-direction: row;

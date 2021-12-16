@@ -153,7 +153,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 #new-role-card {
   height: 400px;
   width: 260px;

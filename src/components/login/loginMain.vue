@@ -109,7 +109,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 
 #login-main {
   height: 100%;

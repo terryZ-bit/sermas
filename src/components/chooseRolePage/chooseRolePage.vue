@@ -116,8 +116,10 @@ export default {
       //         }
       //       })
       this.role_check_loading = true
-      this.$message.success(role_id)
-
+      this.$message.success('欢迎您！ ' + role_name)
+      localStorage.setItem("role_name", role_name)
+      localStorage.setItem("role_id", role_id)
+      localStorage.setItem("role", role)
       this.$router.push({
         name: 'home',
         params: {
@@ -132,7 +134,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 
 #mainPage {
   height: 100%;

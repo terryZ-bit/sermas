@@ -172,7 +172,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 #sign-up {
   height: 100%;
   width: 100%;
@@ -224,7 +224,7 @@ export default {
             }
 
             .el-input__inner {
-              padding-left: 0px;
+              padding-left: 0;
             }
 
             .el-select {
@@ -233,7 +233,7 @@ export default {
               }
               .el-input {
                 width: 120px;
-                padding: 0px;
+                padding: 0;
               }
             }
           }
