@@ -1,3 +1,30 @@
+# 产品介绍
+
+- `sermas` 是一款轻量级的服务器资源管理网站，可以有效的进行一个组织的服务器租用管理
+- `sermas` 是 ***完全免运维*** 的，它全部采用serverless架构进行开发
+- `sermas` 设计之初就考虑的高并发场景，因为前后端全部采用serverless开发，所以唯一的性能瓶颈在于数据库
+
+## 演示地址
+[sermas.top](https://sermas-1257122541.cos-website.ap-guangzhou.myqcloud.com/)
+
+## 技术选型
+
+- 后端框架： 阿里云FC，Python(requests, redis, pymysql, ......)
+- 前端框架： Vue2.0 + elementUI
+- 数据库： MySql 阿里飞天表格
+- 缓存 Redis
+- 版本控制： git
+- 认证鉴权： Token
+- 网关： 阿里云api网关
+- 部分需要持续工作的任务（比如监听）： 阿里云 ServerLess 引擎
+- 资源存储： 阿里云OSS
+- 前端自动化构建： npm， 腾讯serverless工具
+- 后端自动化构建： 阿里serverless S 工具
+- 前端编辑器： webstorm
+- 后端编辑器： vscode， ali Function compute插件
+
+
+### _下面是前端服务的serverless构建文档，来自阿里云_
 # 快速构建 vue-starter
 
 **中文** | [English](./README_EN.md)
@@ -68,3 +95,5 @@ touch .env
 TENCENT_SECRET_ID=123
 TENCENT_SECRET_KEY=123
 ```
+
+
