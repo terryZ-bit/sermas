@@ -3,10 +3,12 @@
     <div class="role_welcome_title">
       <h1 class="ctrl-main-h1">您好！
         <span style="color: #698fd9">{{role_name}}</span>
+        您所在的组织是&nbsp;&nbsp;
+        <span style="color: #698fd9">{{org_name}}</span>
       </h1>
     </div>
 
-    <div class="role-welcome-info-card">
+    <div class="role-welcome-info-card" v-if="role==='1'">
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <span>我租用的服务器</span>
@@ -39,6 +41,8 @@ export default {
   data() {
     return {
       role_name: localStorage.getItem("role_name"),
+      role: localStorage.getItem("role"),
+      org_name: localStorage.getItem("org_name")
     }
   }
 }

@@ -33,7 +33,7 @@
             </el-empty>
 
             <div class="main-page-role-list" v-show="((role_num) && (!newRoleCardAllowed))" v-for="role in role_list" :key="role.role_name">
-              <el-button icon="el-icon-user-solid" @click="loginRole(role.role_id, role.role_name, role.role)" :loading="role_check_loading">
+              <el-button icon="el-icon-user-solid" @click="loginRole(role.role_id, role.role_name, role.role, role.org_name, role.org_id)" :loading="role_check_loading">
                 {{role.role_name}}
               </el-button>
             </div>
@@ -107,19 +107,16 @@ export default {
       })
     },
 
-    loginRole(role_id, role_name, role) {
-      // axios
-      //   .get('',
-      //       {
-      //         params: {
-      //           role_id: role_id
-      //         }
-      //       })
+    loginRole(role_id, role_name, role, org_name, org_id) {
+
       this.role_check_loading = true
       this.$message.success('欢迎您！ ' + role_name)
       localStorage.setItem("role_name", role_name)
       localStorage.setItem("role_id", role_id)
       localStorage.setItem("role", role)
+      localStorage.setItem("org_name", org_name)
+      localStorage.setItem("org_id", org_id)
+      // localStorage.setItem("org_name", )
       this.$router.push({
         name: 'home',
         params: {

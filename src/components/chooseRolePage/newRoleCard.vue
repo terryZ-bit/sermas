@@ -121,7 +121,7 @@ export default {
         if (valid) {
           this.button_loading = true
           axios
-            .post('https://1904535339792558.cn-chengdu.fc.aliyuncs.com/2016-08-15/proxy/sermas-backend/new-role/',
+            .post('https://1904535339792558.cn-chengdu.fc.aliyuncs.com/2016-08-15/proxy/sermas-backend.LATEST/new-role/',
                 {
                   action: 'newRole',
                   data: this.form
@@ -160,6 +160,7 @@ export default {
   float: left;
   margin-left: 0;
   margin-right: auto;
+  text-align: left;
 
   .el-form-item__label {
     float: left;
