@@ -20,7 +20,21 @@
       </el-card>
     </div>
 
-    <div class="role-welcome-org-card">
+    <div class="role-main-manage-card" v-if="role==='2'">
+      <el-card>
+        <div slot="header" class="clearfix">
+          <span>我管理的的服务器</span>
+          <el-button style="float: right; padding: 3px 0" type="text">详情</el-button>
+        </div>
+        <div v-for="o in 4" :key="o" class="text item">
+          {{'列表内容 ' + o }}
+        </div>
+      </el-card>
+    </div>
+
+
+
+    <div class="role-welcome-org-card" >
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <span>组织通知</span>
@@ -67,6 +81,11 @@ export default {
 
   .role-welcome-org-card {
     padding-top: 30px;
+    float: left;
+    text-align: left;
+  }
+
+  .role-main-manage-card {
     float: left;
     text-align: left;
   }

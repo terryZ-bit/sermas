@@ -9,15 +9,69 @@
       <el-container>
 
         <el-aside width="200px">
-          <home-aside>
+          <div id="main-aside">
+            <el-menu
+                default-active="2"
+                class="el-menu-vertical-role-1"
+                v-if="role==='1'"
+            >
+              <el-submenu index="1">
+                <template slot="title">
+                  <i class="el-icon-s-platform"></i>
+                  <span>控制台</span>
+                </template>
+                <el-menu-item index="1-1" >我的服务器</el-menu-item>
+                <el-menu-item index="1-2" >服务器市场</el-menu-item>
+              </el-submenu>
+              <el-menu-item index="2">
+                <i class="el-icon-menu"></i>
+                <span slot="title">组织管理</span>
+              </el-menu-item>
+              <el-submenu index="3">
+                <template slot="title">
+                  <i class="el-icon-setting"></i>
+                  <span>设置</span>
+                </template>
+                <el-menu-item index="3-1">角色设置</el-menu-item>
+                <el-menu-item index="3-2">个人设置</el-menu-item>
+              </el-submenu>
+            </el-menu>
 
-          </home-aside>
+
+            <el-menu
+                default-active="2"
+                class="el-menu-vertical-role-2"
+                v-if="role==='2'"
+            >
+              <el-submenu index="1">
+                <template slot="title">
+                  <i class="el-icon-s-platform"></i>
+                  <span>控制台</span>
+                </template>
+                <el-menu-item index="1-1" >组织服务器管理</el-menu-item>
+              </el-submenu>
+              <el-menu-item index="2">
+                <i class="el-icon-menu"></i>
+                <span slot="title">组织管理</span>
+              </el-menu-item>
+              <el-submenu index="3">
+                <template slot="title">
+                  <i class="el-icon-setting"></i>
+                  <span>设置</span>
+                </template>
+                <el-menu-item index="3-1">角色设置</el-menu-item>
+                <el-menu-item index="3-2">个人设置</el-menu-item>
+              </el-submenu>
+            </el-menu>
+          </div>
         </el-aside>
 
         <el-main>
-          <home-main>
+          <div id="home-main">
 
-          </home-main>
+            <!-- 欢迎界面显示控制台    -->
+            <ctrl-lab></ctrl-lab>
+          </div>
         </el-main>
 
       </el-container>
@@ -30,11 +84,17 @@
 <script>
 
 import PublicHeader from "../publicComponents/header";
-import HomeAside from "./homeAside";
-import HomeMain from "./homeMain";
+import CtrlLab from "../ctrlLab/ctrlLab";
 export default {
   name: "home",
-  components: {HomeMain, HomeAside, PublicHeader}
+  components: {CtrlLab, PublicHeader},
+
+  data() {
+    return {
+      is_ctrl_show: true,
+      role: localStorage.getItem('role')
+    }
+  }
 }
 </script>
 
@@ -52,7 +112,21 @@ export default {
     .el-aside {
       box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
       border-top: 1px;
-      border-radius: 0
+      border-radius: 0;
+
+      #main-aside {
+        height: 100%;
+        width: 100%;
+
+        .el-menu {
+          all: unset;
+          text-align: left;
+        }
+
+        .el-submenu {
+          all: unset;
+        }
+      }
     }
 
     .el-main {

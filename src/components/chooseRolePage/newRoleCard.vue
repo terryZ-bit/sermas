@@ -117,9 +117,9 @@ export default {
     },
 
     submitForm(formName) {
+      this.button_loading = true
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.button_loading = true
           axios
             .post('https://1904535339792558.cn-chengdu.fc.aliyuncs.com/2016-08-15/proxy/sermas-backend.LATEST/new-role/',
                 {
