@@ -22,7 +22,7 @@
                   <span>控制台</span>
                 </template>
                 <el-menu-item index="1-1" >我的服务器</el-menu-item>
-                <el-menu-item index="1-2" >服务器市场</el-menu-item>
+                <el-menu-item index="1-2" @click="chooseMarket">服务器市场</el-menu-item>
               </el-submenu>
               <el-menu-item index="2">
                 <i class="el-icon-menu"></i>
@@ -79,6 +79,9 @@
               <server-manage v-if="manage_server_show"></server-manage>
             </transition>
 
+            <transition name="el-fade-in-linear">
+              <user-server-market v-if="market_server_show"> </user-server-market>
+            </transition>
 
           </div>
         </el-main>
@@ -95,28 +98,38 @@
 import PublicHeader from "../publicComponents/header";
 import CtrlLab from "../ctrlLab/ctrlLab";
 import ServerManage from "../serverManage/serverManage";
+import UserServerMarket from "../serverManage/userServerMarket";
 export default {
   name: "home",
-  components: {ServerManage, CtrlLab, PublicHeader},
+  components: {UserServerMarket, ServerManage, CtrlLab, PublicHeader},
 
   data() {
     return {
       is_ctrl_show: true,
       role: localStorage.getItem('role'),
       center_show: true,
-      manage_server_show: false
+      manage_server_show: false,
+      market_server_show: false
     }
   },
 
   methods: {
     chooseManageServer() {
       this.center_show = false
+      this.market_server_show = false
       this.manage_server_show = true
     },
 
     chooseCenter() {
-      this.center_show = true
       this.manage_server_show = false
+      this.market_server_show = false
+      this.center_show = true
+    },
+
+    chooseMarket() {
+      this.market_server_show = true
+      this.manage_server_show = false
+      this.center_show = false
     }
   }
 }

@@ -25,7 +25,7 @@
               fixed
               prop="server_id"
               label="编号"
-              width="150">
+              width="100">
           </el-table-column>
           <el-table-column
               prop="rent_status"
@@ -63,7 +63,7 @@
               width="100">
             <template slot-scope="scope">
               <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-              <el-button type="text" size="small">编辑</el-button>
+              <el-button type="text" size="small" @click="deleteServer(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -150,6 +150,7 @@ export default {
         this.$message.success('服务器添加成功！')
         this.dialogFormVisible = false
         this.new_server_button_load = false
+        this.listAllServer()
       })
       .catch( err => {
         console.log(err)
@@ -181,6 +182,34 @@ export default {
         console.log(resp)
         this.tableData = resp.data.server_list
           })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+
+    deleteServer(row) {
+      this.$confirm('确认删除？')
+      .then(_ => {
+        console.log(_)
+        axios
+        .get('https://1904535339792558.cn-chengdu.fc.aliyuncs.com/2016-08-15/proxy/sermas-backend/delete-server/',
+            {
+              params: {
+                email: localStorage.getItem('email'),
+                token: localStorage.getItem('token'),
+                server_id: row.server_id
+              }
+            })
+        .then(resp => {
+          console.log(resp)
+          this.$message.success('删除成功')
+          this.listAllServer()
+        })
+        .catch(err => {
+          console.log(err)
+          this.$message.error('删除失败！')
+        })
+      })
     }
   }
 }
