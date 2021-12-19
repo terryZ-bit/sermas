@@ -9,14 +9,15 @@
       <el-container>
 
         <el-aside width="200px">
+
           <div id="main-aside">
             <el-menu
                 default-active="2"
                 class="el-menu-vertical-role-1"
                 v-if="role==='1'"
             >
-              <el-submenu index="1">
-                <template slot="title">
+              <el-submenu index="1" @click="chooseCenter">
+                <template slot="title" >
                   <i class="el-icon-s-platform"></i>
                   <span>控制台</span>
                 </template>
@@ -48,7 +49,8 @@
                   <i class="el-icon-s-platform"></i>
                   <span>控制台</span>
                 </template>
-                <el-menu-item index="1-1" >组织服务器管理</el-menu-item>
+                <el-menu-item index="1-1" @click="chooseCenter">资源概览</el-menu-item>
+                <el-menu-item index="1-2" @click="chooseManageServer">组织服务器管理</el-menu-item>
               </el-submenu>
               <el-menu-item index="2">
                 <i class="el-icon-menu"></i>
@@ -68,9 +70,16 @@
 
         <el-main>
           <div id="home-main">
+            <transition name="el-fade-in-linear">
+              <!-- 欢迎界面显示控制台    -->
+              <ctrl-lab v-show="center_show"></ctrl-lab>
+            </transition>
 
-            <!-- 欢迎界面显示控制台    -->
-            <ctrl-lab></ctrl-lab>
+            <transition name="el-fade-in-linear">
+              <server-manage v-if="manage_server_show"></server-manage>
+            </transition>
+
+
           </div>
         </el-main>
 
@@ -85,14 +94,29 @@
 
 import PublicHeader from "../publicComponents/header";
 import CtrlLab from "../ctrlLab/ctrlLab";
+import ServerManage from "../serverManage/serverManage";
 export default {
   name: "home",
-  components: {CtrlLab, PublicHeader},
+  components: {ServerManage, CtrlLab, PublicHeader},
 
   data() {
     return {
       is_ctrl_show: true,
-      role: localStorage.getItem('role')
+      role: localStorage.getItem('role'),
+      center_show: true,
+      manage_server_show: false
+    }
+  },
+
+  methods: {
+    chooseManageServer() {
+      this.center_show = false
+      this.manage_server_show = true
+    },
+
+    chooseCenter() {
+      this.center_show = true
+      this.manage_server_show = false
     }
   }
 }
