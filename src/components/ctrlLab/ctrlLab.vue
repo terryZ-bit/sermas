@@ -5,6 +5,8 @@
         <span style="color: #698fd9">{{role_name}}</span>
         您所在的组织是&nbsp;&nbsp;
         <span style="color: #698fd9">{{org_name}}</span>
+        &nbsp;&nbsp;ID：&nbsp;
+        <span style="color: #698fd9">{{org_id}}</span>
       </h1>
     </div>
 
@@ -56,7 +58,8 @@ export default {
     return {
       role_name: localStorage.getItem("role_name"),
       role: localStorage.getItem("role"),
-      org_name: localStorage.getItem("org_name")
+      org_name: localStorage.getItem("org_name"),
+      org_id: localStorage.getItem("org_id")
     }
   }
 }

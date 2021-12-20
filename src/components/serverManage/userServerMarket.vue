@@ -39,7 +39,7 @@
               width="100">
             <template slot-scope="scope">
               <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-              <el-button type="text" size="small" @click="dialogFormVisible = true; this.choose_server_id = scope.row.server_id;">租用</el-button>
+              <el-button type="text" size="small" @click="rentServerBeforeCheck(scope.row.server_id)">租用</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -52,14 +52,15 @@
               <el-date-picker
                   v-model="rent_time"
                   type="datetime"
-                  placeholder="选择日期时间">
+                  placeholder="选择日期时间"
+                  value-format="yyyy-MM-dd hh:mm:ss">
               </el-date-picker>
             </div>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible = false" >取 消</el-button>
-          <el-button type="primary" @click="rentServer(choose_server_id, rent_time)" :loading="rent_server_button_load">确 定</el-button>
+          <el-button type="primary" @click="rentServer(rent_time)" :loading="rent_server_button_load">确 定</el-button>
         </div>
       </el-dialog>
     </div>
@@ -80,7 +81,7 @@ export default {
       formLabelWidth: 80,
       rent_server_button_load: false,
       rent_time: '',
-      choose_server_id: '',
+      choose_server_id: 0,
       form_rent_server: {
 
       }
@@ -95,7 +96,7 @@ export default {
       console.log(row);
     },
 
-    rentServer(server_id, time) {
+    rentServer(time) {
       this.rent_server_button_load = true
       if (Date.parse(time) < new Date()) {
         this.$message.error('选择时间小于当前时间！')
@@ -103,18 +104,26 @@ export default {
         return
       }
       axios
-      .get('', {
+      .get('https://1904535339792558.cn-chengdu.fc.aliyuncs.com/2016-08-15/proxy/sermas-backend/rent_server/', {
         params: {
-          server_id: server_id,
-          time: time
+          server_id: this.choose_server_id,
+          time: time,
+          email: localStorage.getItem('email'),
+          token: localStorage.getItem('token'),
+          role_id: localStorage.getItem('role_id'),
+          org_id: localStorage.getItem('org_id')
         }
       }).then(res => {
         console.log(res)
         this.$message.success('租用成功！')
         this.rent_server_button_load = false
+        this.dialogFormVisible = false
+        this.listAllServer()
       }).catch( err => {
         console.log(err)
-        this.message.error('租用失败！')
+        this.$message.error('租用失败！')
+        this.rent_server_button_load = false
+        this.dialogFormVisible = false
       })
     },
 
@@ -137,6 +146,11 @@ export default {
             console.log(err)
           })
     },
+
+    rentServerBeforeCheck(server_id) {
+      this.dialogFormVisible = true
+      this.choose_server_id = server_id
+    }
   }
 }
 </script>

@@ -21,7 +21,7 @@
                   <i class="el-icon-s-platform"></i>
                   <span>控制台</span>
                 </template>
-                <el-menu-item index="1-1" >我的服务器</el-menu-item>
+                <el-menu-item index="1-1" @click="chooseUserRent">我的服务器</el-menu-item>
                 <el-menu-item index="1-2" @click="chooseMarket">服务器市场</el-menu-item>
               </el-submenu>
               <el-menu-item index="2">
@@ -83,6 +83,10 @@
               <user-server-market v-if="market_server_show"> </user-server-market>
             </transition>
 
+            <transition name="el-fade-in-linear">
+              <user-rent-server v-if="user_rent_show"></user-rent-server>
+            </transition>
+
           </div>
         </el-main>
 
@@ -99,9 +103,10 @@ import PublicHeader from "../publicComponents/header";
 import CtrlLab from "../ctrlLab/ctrlLab";
 import ServerManage from "../serverManage/serverManage";
 import UserServerMarket from "../serverManage/userServerMarket";
+import UserRentServer from "../serverManage/userRentServer";
 export default {
   name: "home",
-  components: {UserServerMarket, ServerManage, CtrlLab, PublicHeader},
+  components: {UserRentServer, UserServerMarket, ServerManage, CtrlLab, PublicHeader},
 
   data() {
     return {
@@ -109,7 +114,8 @@ export default {
       role: localStorage.getItem('role'),
       center_show: true,
       manage_server_show: false,
-      market_server_show: false
+      market_server_show: false,
+      user_rent_show: false
     }
   },
 
@@ -117,19 +123,29 @@ export default {
     chooseManageServer() {
       this.center_show = false
       this.market_server_show = false
+      this.user_rent_show = false
       this.manage_server_show = true
     },
 
     chooseCenter() {
       this.manage_server_show = false
       this.market_server_show = false
+      this.user_rent_show = false
       this.center_show = true
     },
 
     chooseMarket() {
-      this.market_server_show = true
       this.manage_server_show = false
       this.center_show = false
+      this.user_rent_show = false
+      this.market_server_show = true
+    },
+
+    chooseUserRent() {
+      this.manage_server_show = false
+      this.center_show = false
+      this.market_server_show = false
+      this.user_rent_show = true
     }
   }
 }

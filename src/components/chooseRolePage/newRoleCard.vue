@@ -74,10 +74,6 @@ export default {
           {required: true, message: '请输入用户昵称', trigger: 'blur'},
           {min:3, max:10, message: '长度在3到10个字符', trigger: 'blur'}
         ],
-        region_id: [
-          {required: false, message: '请输入组织ID', trigger: 'blur'},
-          {min:12, max:12, message: '长度为12个字符', trigger: 'blur'}
-        ],
         region_name: [
           {required: false, message: '请输入组织名称', trigger: 'blur'},
           {min:2, max:10, message: '长度在2到12个字符', trigger: 'blur'}
