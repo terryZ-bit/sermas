@@ -51,11 +51,16 @@
                 </template>
                 <el-menu-item index="1-1" @click="chooseCenter">资源概览</el-menu-item>
                 <el-menu-item index="1-2" @click="chooseManageServer">组织服务器管理</el-menu-item>
+                <el-menu-item index="1-3" @click="chooseRentLog">组织服务器租用记录</el-menu-item>
               </el-submenu>
-              <el-menu-item index="2">
-                <i class="el-icon-menu"></i>
-                <span slot="title">组织管理</span>
-              </el-menu-item>
+              <el-submenu index="2">
+                <template slot="title">
+                  <i class="el-icon-menu"></i>
+                  <span>组织管理</span>
+                </template>
+                <el-menu-item index="2-1">人员管理</el-menu-item>
+                <el-menu-item index="2-2">公告管理</el-menu-item>
+              </el-submenu>
               <el-submenu index="3">
                 <template slot="title">
                   <i class="el-icon-setting"></i>
@@ -115,7 +120,8 @@ export default {
       center_show: true,
       manage_server_show: false,
       market_server_show: false,
-      user_rent_show: false
+      user_rent_show: false,
+      admin_rent_log_show: false
     }
   },
 
@@ -146,6 +152,10 @@ export default {
       this.center_show = false
       this.market_server_show = false
       this.user_rent_show = true
+    },
+
+    chooseRentLog() {
+
     }
   }
 }
