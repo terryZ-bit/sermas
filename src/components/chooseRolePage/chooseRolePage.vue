@@ -32,10 +32,25 @@
               <el-button type="primary" plain @click="newRole">创建角色</el-button>
             </el-empty>
 
-            <div class="main-page-role-list" v-show="((role_num) && (!newRoleCardAllowed))" v-for="role in role_list" :key="role.role_name">
-              <el-button icon="el-icon-user-solid" @click="loginRole(role.role_id, role.role_name, role.role, role.org_name, role.org_id)" :loading="role_check_loading">
-                {{role.role_name}}
-              </el-button>
+            <div class="main-page-role-list" v-show="((role_num) && (!newRoleCardAllowed))" v-for="role in role_list" :key="role.role_id">
+              <el-popover
+                  placement="right"
+                  width="400"
+                  trigger="hover">
+                <el-card class="box-card">
+                  <div slot="header" class="clearfix">
+                    <span>用户信息</span>
+                  </div>
+                  <div>
+                    <p>用户id：<span style="color: #4e7ad2">{{role.role_id}}</span></p>
+                    <p>角色等级：<span style="color: #4e7ad2">{{role.role === 1 ? '用户': '管理员'}}</span></p>
+                    <p>所在组织：<span style="color: #4e7ad2">{{role.org_name}}</span></p>
+                  </div>
+                </el-card>
+                <el-button icon="el-icon-user-solid" @click="loginRole(role.role_id, role.role_name, role.role, role.org_name, role.org_id)" :loading="role_check_loading" slot="reference">
+                  {{role.role_name}}
+                </el-button>
+              </el-popover>
             </div>
             <el-button icon="el-icon-upload2" v-show="(role_num && (!newRoleCardAllowed))" plain @click="newRole">
               新建一个角色
@@ -179,7 +194,18 @@ export default {
 
         .main-page-role-list {
           display: flex;
-          flex-direction: column;
+
+          .el-button {
+            margin-right: auto;
+            margin-left: 0;
+            margin-top: 20px;
+            width: 200px;
+          }
+
+          .el-popover {
+            margin-right: auto;
+            margin-left: 0;
+          }
         }
       }
     }

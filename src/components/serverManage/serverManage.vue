@@ -181,6 +181,7 @@ export default {
       .then( resp => {
         console.log(resp)
         this.tableData = resp.data.server_list
+        this.$message.success('刷新管理列表成功')
           })
       .catch(err => {
         console.log(err)

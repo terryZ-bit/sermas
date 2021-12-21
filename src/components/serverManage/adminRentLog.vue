@@ -43,6 +43,12 @@
               width="100">
           </el-table-column>
           <el-table-column
+              fixed
+              prop="is_accord"
+              label="是否为主动退租"
+              width="100">
+          </el-table-column>
+          <el-table-column
               fixed="right"
               label="操作"
               width="150">
@@ -94,7 +100,7 @@ export default {
           })
       .then(resp => {
         console.log(resp)
-        this.$message.success('刷新列表成功')
+        this.$message.success('刷新租用列表成功')
         this.table_data = resp.data.server_list
       })
       .catch( err => {

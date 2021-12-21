@@ -49,7 +49,7 @@
                   <i class="el-icon-s-platform"></i>
                   <span>控制台</span>
                 </template>
-                <el-menu-item index="1-1" @click="chooseCenter">资源概览</el-menu-item>
+                <el-menu-item index="1-1" @click="chooseCenter">概览</el-menu-item>
                 <el-menu-item index="1-2" @click="chooseManageServer">组织服务器管理</el-menu-item>
                 <el-menu-item index="1-3" @click="chooseRentLog">组织服务器租用记录</el-menu-item>
               </el-submenu>
@@ -60,6 +60,7 @@
                 </template>
                 <el-menu-item index="2-1">人员管理</el-menu-item>
                 <el-menu-item index="2-2">公告管理</el-menu-item>
+                <el-menu-item index="2-3">组织信息管理</el-menu-item>
               </el-submenu>
               <el-submenu index="3">
                 <template slot="title">
