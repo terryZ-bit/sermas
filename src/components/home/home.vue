@@ -81,15 +81,23 @@
             </transition>
 
             <transition name="el-fade-in-linear">
+              <!-- 管理员服务器管理台界面  -->
               <server-manage v-if="manage_server_show"></server-manage>
             </transition>
 
             <transition name="el-fade-in-linear">
+              <!-- 用户服务器资源市场显示界面 -->
               <user-server-market v-if="market_server_show"> </user-server-market>
             </transition>
 
             <transition name="el-fade-in-linear">
+              <!--用户租用界面  -->
               <user-rent-server v-if="user_rent_show"></user-rent-server>
+            </transition>
+
+            <transition name="el-fade-in-linear">
+              <!--  管理员查看租用信息界面 -->
+              <admin-rent-log v-if="admin_rent_log_show"></admin-rent-log>
             </transition>
 
           </div>
@@ -109,9 +117,10 @@ import CtrlLab from "../ctrlLab/ctrlLab";
 import ServerManage from "../serverManage/serverManage";
 import UserServerMarket from "../serverManage/userServerMarket";
 import UserRentServer from "../serverManage/userRentServer";
+import AdminRentLog from "../serverManage/adminRentLog";
 export default {
   name: "home",
-  components: {UserRentServer, UserServerMarket, ServerManage, CtrlLab, PublicHeader},
+  components: {AdminRentLog, UserRentServer, UserServerMarket, ServerManage, CtrlLab, PublicHeader},
 
   data() {
     return {
@@ -121,7 +130,7 @@ export default {
       manage_server_show: false,
       market_server_show: false,
       user_rent_show: false,
-      admin_rent_log_show: false
+      admin_rent_log_show: false,
     }
   },
 
@@ -130,6 +139,7 @@ export default {
       this.center_show = false
       this.market_server_show = false
       this.user_rent_show = false
+      this.admin_rent_log_show = false
       this.manage_server_show = true
     },
 
@@ -137,6 +147,7 @@ export default {
       this.manage_server_show = false
       this.market_server_show = false
       this.user_rent_show = false
+      this.admin_rent_log_show = false
       this.center_show = true
     },
 
@@ -144,6 +155,7 @@ export default {
       this.manage_server_show = false
       this.center_show = false
       this.user_rent_show = false
+      this.admin_rent_log_show = false
       this.market_server_show = true
     },
 
@@ -151,11 +163,16 @@ export default {
       this.manage_server_show = false
       this.center_show = false
       this.market_server_show = false
+      this.admin_rent_log_show = false
       this.user_rent_show = true
     },
 
     chooseRentLog() {
-
+      this.manage_server_show = false
+      this.center_show = false
+      this.market_server_show = false
+      this.user_rent_show = false
+      this.admin_rent_log_show = true
     }
   }
 }
