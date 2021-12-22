@@ -58,7 +58,7 @@
                   <i class="el-icon-menu"></i>
                   <span>组织管理</span>
                 </template>
-                <el-menu-item index="2-1">人员管理</el-menu-item>
+                <el-menu-item index="2-1" @click="chooseRolePerson">人员管理</el-menu-item>
                 <el-menu-item index="2-2">公告管理</el-menu-item>
                 <el-menu-item index="2-3">组织信息管理</el-menu-item>
               </el-submenu>
@@ -101,6 +101,11 @@
               <admin-rent-log v-if="admin_rent_log_show"></admin-rent-log>
             </transition>
 
+            <transition name="el-fade-in-linear">
+              <!--  管理员查看角色列表信息界面 -->
+              <role-person-manage v-if="role_person_manage_show"></role-person-manage>
+            </transition>
+
           </div>
         </el-main>
 
@@ -119,9 +124,10 @@ import ServerManage from "../serverManage/serverManage";
 import UserServerMarket from "../serverManage/userServerMarket";
 import UserRentServer from "../serverManage/userRentServer";
 import AdminRentLog from "../serverManage/adminRentLog";
+import RolePersonManage from "../orgManage/rolePersonManage";
 export default {
   name: "home",
-  components: {AdminRentLog, UserRentServer, UserServerMarket, ServerManage, CtrlLab, PublicHeader},
+  components: {RolePersonManage, AdminRentLog, UserRentServer, UserServerMarket, ServerManage, CtrlLab, PublicHeader},
 
   data() {
     return {
@@ -132,6 +138,7 @@ export default {
       market_server_show: false,
       user_rent_show: false,
       admin_rent_log_show: false,
+      role_person_manage_show: false,
     }
   },
 
@@ -141,6 +148,7 @@ export default {
       this.market_server_show = false
       this.user_rent_show = false
       this.admin_rent_log_show = false
+      this.role_person_manage_show = false
       this.manage_server_show = true
     },
 
@@ -149,6 +157,7 @@ export default {
       this.market_server_show = false
       this.user_rent_show = false
       this.admin_rent_log_show = false
+      this.role_person_manage_show = false
       this.center_show = true
     },
 
@@ -157,6 +166,7 @@ export default {
       this.center_show = false
       this.user_rent_show = false
       this.admin_rent_log_show = false
+      this.role_person_manage_show = false
       this.market_server_show = true
     },
 
@@ -165,6 +175,7 @@ export default {
       this.center_show = false
       this.market_server_show = false
       this.admin_rent_log_show = false
+      this.role_person_manage_show = false
       this.user_rent_show = true
     },
 
@@ -173,7 +184,17 @@ export default {
       this.center_show = false
       this.market_server_show = false
       this.user_rent_show = false
+      this.role_person_manage_show = false
       this.admin_rent_log_show = true
+    },
+
+    chooseRolePerson() {
+      this.manage_server_show = false
+      this.center_show = false
+      this.market_server_show = false
+      this.user_rent_show = false
+      this.admin_rent_log_show = false
+      this.role_person_manage_show = true
     }
   }
 }
