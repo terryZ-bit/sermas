@@ -54,7 +54,7 @@
               width="150">
             <template slot-scope="scope">
               <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-              <el-button type="text" size="small" @click="letUnRent(scope.row.rent_log_id, scope.row.server_id)" :disabled="scope.row.rent_status === '正在租用'">停止租用</el-button>
+              <el-button type="text" size="small" @click="letUnRent(scope.row.rent_log_id, scope.row.server_id)" :disabled="(scope.row.rent_status === '停止租用')">停止租用</el-button>
             </template>
           </el-table-column>
         </el-table>

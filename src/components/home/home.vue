@@ -59,7 +59,7 @@
                   <span>组织管理</span>
                 </template>
                 <el-menu-item index="2-1" @click="chooseRolePerson">人员管理</el-menu-item>
-                <el-menu-item index="2-2">公告管理</el-menu-item>
+                <el-menu-item index="2-2" @click="chooseNoticeManage">公告管理</el-menu-item>
                 <el-menu-item index="2-3">组织信息管理</el-menu-item>
               </el-submenu>
               <el-submenu index="3">
@@ -106,6 +106,10 @@
               <role-person-manage v-if="role_person_manage_show"></role-person-manage>
             </transition>
 
+            <transition name="el-fade-in-linear">
+              <!--  管理员查看角色列表信息界面 -->
+              <org-notice-manage v-if="org_notice_manage_show"></org-notice-manage>
+            </transition>
           </div>
         </el-main>
 
@@ -125,9 +129,12 @@ import UserServerMarket from "../serverManage/userServerMarket";
 import UserRentServer from "../serverManage/userRentServer";
 import AdminRentLog from "../serverManage/adminRentLog";
 import RolePersonManage from "../orgManage/rolePersonManage";
+import OrgNoticeManage from "../orgNotice/orgNotice";
 export default {
   name: "home",
-  components: {RolePersonManage, AdminRentLog, UserRentServer, UserServerMarket, ServerManage, CtrlLab, PublicHeader},
+  components: {
+    OrgNoticeManage,
+    RolePersonManage, AdminRentLog, UserRentServer, UserServerMarket, ServerManage, CtrlLab, PublicHeader},
 
   data() {
     return {
@@ -139,6 +146,7 @@ export default {
       user_rent_show: false,
       admin_rent_log_show: false,
       role_person_manage_show: false,
+      org_notice_manage_show: false
     }
   },
 
@@ -149,6 +157,7 @@ export default {
       this.user_rent_show = false
       this.admin_rent_log_show = false
       this.role_person_manage_show = false
+      this.org_notice_manage_show = false
       this.manage_server_show = true
     },
 
@@ -158,6 +167,7 @@ export default {
       this.user_rent_show = false
       this.admin_rent_log_show = false
       this.role_person_manage_show = false
+      this.org_notice_manage_show = false
       this.center_show = true
     },
 
@@ -167,6 +177,7 @@ export default {
       this.user_rent_show = false
       this.admin_rent_log_show = false
       this.role_person_manage_show = false
+      this.org_notice_manage_show = false
       this.market_server_show = true
     },
 
@@ -176,6 +187,7 @@ export default {
       this.market_server_show = false
       this.admin_rent_log_show = false
       this.role_person_manage_show = false
+      this.org_notice_manage_show = false
       this.user_rent_show = true
     },
 
@@ -185,6 +197,7 @@ export default {
       this.market_server_show = false
       this.user_rent_show = false
       this.role_person_manage_show = false
+      this.org_notice_manage_show = false
       this.admin_rent_log_show = true
     },
 
@@ -194,7 +207,18 @@ export default {
       this.market_server_show = false
       this.user_rent_show = false
       this.admin_rent_log_show = false
+      this.org_notice_manage_show = false
       this.role_person_manage_show = true
+    },
+
+    chooseNoticeManage() {
+      this.manage_server_show = false
+      this.center_show = false
+      this.market_server_show = false
+      this.user_rent_show = false
+      this.admin_rent_log_show = false
+      this.role_person_manage_show = false
+      this.org_notice_manage_show = true
     }
   }
 }

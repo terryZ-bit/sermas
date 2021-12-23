@@ -47,7 +47,6 @@
               label="操作"
               width="100">
             <template slot-scope="scope">
-              <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
               <el-button type="text" size="small" @click="freezeRole(scope.row)">{{scope.row.role_status === '已激活' ? '冻结' : '解冻'}}</el-button>
             </template>
           </el-table-column>
@@ -67,6 +66,7 @@ export default {
       table_data: [],
       chooseUserList: "primary",
       chooseManagerList: "info",
+      choose_role: 1
     }
   },
 
@@ -85,22 +85,33 @@ export default {
       .then( confirm => {
         console.log(confirm)
         axios
-        .get('', {
+        .get('https://1904535339792558.cn-chengdu.fc.aliyuncs.com/2016-08-15/proxy/sermas-backend/freeze-user-role/', {
           params: {
             email: localStorage.getItem('email'),
             token: localStorage.getItem('token'),
-            role_id: row.role_id,
+            role_id: localStorage.getItem('role_id'),
             manage_id: localStorage.getItem('role_id'),
             org_id: localStorage.getItem('org_id'),
             role: localStorage.getItem('role'),
+            action_role_id: row.role_id,
             action: row.role_status,
           }
+        })
+        .then( resp => {
+          console.log(resp)
+          this.$message.success((row.role_status === '已激活' ? '冻结' : '解冻') + '成功！')
+          this.listAllRoles(this.choose_role)
+        })
+        .catch( err => {
+          console.log(err)
+          this.$message.error( (row.role_status === '已激活' ? '冻结' : '解冻') + '失败！')
         })
       })
     },
 
     listAllRoles(choose_role) {
       console.log(choose_role)
+      this.choose_role = choose_role
       axios
       .get('https://1904535339792558.cn-chengdu.fc.aliyuncs.com/2016-08-15/proxy/sermas-backend/list-org-roles/', {
         params: {
